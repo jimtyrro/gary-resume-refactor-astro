@@ -1,0 +1,24 @@
+---
+import IconListItem from "./IconListItem.astro";
+---
+
+<ul role="list">
+  <IconListItem skill="html" image="./html.svg" />
+  <IconListItem skill="css" image="./css.svg" />
+  <IconListItem skill="scss" image="./scss.svg" />
+  <IconListItem skill="js" image="./js.svg" />
+  <IconListItem skill="react" image="./react.svg" />
+</ul>
+
+<style>
+  ul {
+    height: 100%;
+    border-left: 1px solid var(--clr-primary-300);
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: grid;
+    align-content: center;
+    gap: 3rem;
+  }
+</style>

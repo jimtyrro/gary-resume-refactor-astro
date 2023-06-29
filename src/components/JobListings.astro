@@ -1,0 +1,94 @@
+---
+const allJobs = await Astro.glob("../content/jobs/*.md");
+---
+
+<div class="job-experience">
+  {
+    allJobs.map((job) => (
+      <div class="job">
+        <p class="year">{job.frontmatter.year}</p>
+        <div class="job-info">
+          <h2 class="role">{job.frontmatter.role}</h2>
+          <span class="company">{job.frontmatter.company}</span>
+        </div>
+        <p set:html={job.compiledContent()} />
+      </div>
+    ))
+  }
+</div>
+
+<style>
+  .job-experience {
+    display: grid;
+    justify-content: start;
+    gap: 1rem;
+    grid-auto-flow: column;
+    overflow-x: auto;
+    position: relative;
+    padding-block: 2rem;
+    scrollbar-color: var(--clr-accent-400) var(--clr-primary-800);
+  }
+
+  .job-experience::-webkit-scrollbar {
+    height: 0.75rem;
+  }
+  .job-experience::-webkit-scrollbar-track {
+    background-color: var(--clr-primary-800);
+    border-radius: 100vw;
+  }
+  .job-experience::-webkit-scrollbar-thumb {
+    background-color: var(--clr-accent-400);
+    border-radius: 100vw;
+  }
+
+  .job-experience::after {
+    content: "";
+    width: 50px;
+    background: transparent;
+  }
+
+  .job {
+    width: 28.5rem;
+    border-radius: 0.5rem;
+    padding: 2rem;
+    background: var(--clr-primary-800);
+  }
+
+  .job * {
+    margin: 0;
+  }
+
+  .job:first-child::before {
+    content: "Current role";
+    position: absolute;
+    color: var(--clr-accent-400);
+    top: 0rem;
+    left: 0;
+  }
+
+  .year {
+    color: var(--clr-accent-400);
+    font-size: var(--fs-300);
+    font-weight: var(--fw-bold);
+    letter-spacing: 0.2em;
+  }
+
+  .job-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 1rem;
+  }
+
+  .role {
+    font-size: var(--fs-600);
+    line-height: 1.2;
+  }
+
+  .company {
+    color: var(--clr-primary-200);
+    font-size: var(--fs-300);
+    font-weight: var(--fw-bold);
+    text-transform: uppercase;
+  }
+</style>
